@@ -18,7 +18,7 @@ def create_app():
 
 
 def configure_routes(app):
-    app.include_router(atrributeRouter, tags=["Get parents classes and datatypes"])
+    app.include_router(atrributeRouter, tags=["Get parent classes and datatypes"])
     app.include_router(classRouter, tags=["Get attributes and datatypes"])
     app.include_router(datatypeRouter, tags=["Get attributes"])
     app.include_router(randomRouter, tags=["Baconipsum sequence"])
