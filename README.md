@@ -58,12 +58,12 @@ CD to project:
 $ cd MoS_Index
 ```
 
-Start flask server locally:
+Start uvicorn server locally:
 
 ```Python
 $ uvicorn main:app --reload
 ```
-Or if you prefer Start flask server with `docker` (docker is required):
+Or if you prefer Start uvicorn server with `docker` (docker is required):
 
 ```Bash
 $ docker-compose up
