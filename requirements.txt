@@ -2,3 +2,5 @@ requests
 PyYAML
 fastapi
 uvicorn
+pytest
+pytest-mock

@@ -45,8 +45,8 @@ class MOsIndex:
             for i in range(len(self.metadata[mo_class])):
                 att, type = self.metadata[mo_class][i][0], self.metadata[mo_class][i][1]
                 if mo_class not in self.class2att:
-                    self.class2att[mo_class] = [{"attribute": att, "type": [type]}]
+                    self.class2att[mo_class] = [{"attribute": att, "type": type}]
                 else:
-                    self.class2att[mo_class].append({"attribute": att, "type": [type]})
+                    self.class2att[mo_class].append({"attribute": att, "type": type})
 
         return self.class2att
