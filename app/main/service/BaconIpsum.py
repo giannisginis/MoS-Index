@@ -1,6 +1,7 @@
 from app.main.utils.ResponseOverride import ResponseOverride
 from app.main.utils.config import *
 from app.main.service.handler import Handler
+from app.main.Exceptions.exceptions import CustomErrorHandler
 
 
 class BaconIpsum:
@@ -24,7 +25,7 @@ class BaconIpsum:
     def run(self):
         results = self._make_request()
         if results.get_status_code() not in [200, 201]:
-            pass
+            return CustomErrorHandler(status_code=results.get_status_code())
         else:
             return {"status_code": results.get_status_code(),
                     "text": self._clean_string(results.get_sequence())}
