@@ -1,7 +1,6 @@
 from typing import Dict, Any
 from urllib.parse import urlencode
 import requests
-from app.main.utils.ResponseOverride import ResponseOverride
 from app.main.utils.config import *
 
 
@@ -13,10 +12,7 @@ class Handler:
         self.headers = headers
 
     def get_request(self):
-        try:
-            url = self.api_provider + "?" + urlencode(
-                {BaconIpsumMeta.TYPE: self.parameters["type"]}) + "&" + urlencode(
-                {BaconIpsumMeta.SENTENSES: self.parameters["sentences"]})
-            return requests.get(url)
-        except requests.exceptions.Timeout:
-            return ResponseOverride(status_code=408)
+        url = self.api_provider + "?" + urlencode(
+            {BaconIpsumMeta.TYPE: self.parameters["type"]}) + "&" + urlencode(
+            {BaconIpsumMeta.SENTENSES: self.parameters["sentences"]})
+        return requests.get(url)
