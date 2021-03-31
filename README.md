@@ -20,10 +20,10 @@ managed of operations and maintenance of wireless networks.
 `MoS-Index` is a microservice which exposes metadata for MOs through 4 endpoints. The service exposes the following endpoints by
 using a given yaml file as fixture:
 
-1. /class: Given the name of the MO class, the endpoint returns a sequence of attribute, datatype pairs in JSON format.
-2. /attribute: Given the name of the MO attribute, the endpoint returns the datatype, and all parent MO classes.
-3. /datatype: Given the name of the datatype, the endpoint returns all MO attributes that belong to this type.
-4. /random: This is a generic endpoint that returns a sequence of four response strings from the https://baconipsum.com/json-api/ public API.
+1. `/class`: Given the name of the MO class, the endpoint returns a sequence of attribute, datatype pairs in JSON format.
+2. `/attribute`: Given the name of the MO attribute, the endpoint returns the datatype, and all parent MO classes.
+3. `/datatype`: Given the name of the datatype, the endpoint returns all MO attributes that belong to this type.
+4. `/random`: This is a generic endpoint that returns a sequence of four response strings from the https://baconipsum.com/json-api/ public API.
 
 
 ### Technology stack
@@ -36,7 +36,17 @@ using a given yaml file as fixture:
 
 ## Design
 
-The `MoS-Index` architecture and design are given in detail in the [design documentation](documents/design.md). 
+The service at startup loads the yaml file with the metadata in cache in order to parse it only one time. With the metadata in memory, the api
+responds with simple `GET` operations by processing the cached file. 
+The REST interface is roughly the following:
+
+* `GET /class | query parameters: "class_name: the name of the MO class"`
+* `GET /atrribute | query parameters: "attribute_name: MO attribute"`
+* `GET /datatype | query parameters: "typename: name of the datatype"`
+* `GET /random | query parameters: "type: <all-meat> or <meat-and-filler>", "sentences: number of sentences"(optional)`
+
+Considering the `random` endpoint the service makes an internal get request to [BaconIsum API](https://baconipsum.com/json-api/) based on the 
+upper level query parameters and returns the response in json format. At shutdown the service clears the cache and terminates the server.
 
 
 ## Installation
